@@ -1,2 +1,14 @@
 <!--pages/post/post.wxml-->
-<text>pages/post/post.wxml</text>
+<view>
+    <swiper indicator-dots="true" autoplay="true" interval="3000" circular="true">
+      <swiper-item>
+        <image src='/images/post/post-1@text.jpg'></image>
+      </swiper-item>
+      <swiper-item>
+        <image src='/images/post/post-2@text.jpg'></image>
+      </swiper-item>
+      <swiper-item>
+        <image src='/images/post/post-3@text.jpg'></image>
+      </swiper-item>
+    </swiper>
+</view>
