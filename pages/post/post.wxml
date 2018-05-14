@@ -1,14 +1,31 @@
 <!--pages/post/post.wxml-->
 <view>
-    <swiper indicator-dots="true" autoplay="true" interval="3000" circular="true">
-      <swiper-item>
-        <image src='/images/post/post-1@text.jpg'></image>
-      </swiper-item>
-      <swiper-item>
-        <image src='/images/post/post-2@text.jpg'></image>
-      </swiper-item>
-      <swiper-item>
-        <image src='/images/post/post-3@text.jpg'></image>
-      </swiper-item>
-    </swiper>
+  <swiper indicator-dots="true" autoplay="true" interval="3000" circular="true">
+    <swiper-item>
+      <image src='/images/post/post-1@text.jpg'></image>
+    </swiper-item>
+    <swiper-item>
+      <image src='/images/post/post-2@text.jpg'></image>
+    </swiper-item>
+    <swiper-item>
+      <image src='/images/post/post-3@text.jpg'></image>
+    </swiper-item>
+  </swiper>
+  <view class="post-container">
+    <view class="post-author-date">
+      <image src="/images/avatar/avatar-5.png" />
+      <text>Jan 28 2017</text>
+    </view>
+    <text class="post-title">小时候的冰棍儿与雪糕</text>
+    <image class="post-image" src="/images/post/post-4.jpg" mode="aspectFill" />
+    <text class="post-content">冰棍与雪糕绝对不是同一个东西。3到5毛钱的雪糕犹如现在的哈根达斯，而5分1毛的冰棒儿就像现在的老冰棒。时过境迁，...</text>
+    <view class="post-like">
+      <image src="/images/icon/wx_app_collect.png" />
+      <text>108</text>
+      <image src="/images/icon/wx_app_view.png"></image>
+      <text>92</text>
+      <image src="/images/icon/wx_app_message.png"></image>
+      <text>7</text>
+    </view>
+  </view>
 </view>
