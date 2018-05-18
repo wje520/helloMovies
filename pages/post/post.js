@@ -1,5 +1,6 @@
 // pages/post/post.js
-var dataObj=require("../../data/data.js")
+// var dataObj=require("../../data/data.js")
+import {DBpost} from '../../db/DBpost.js'
 Page({
 
   /**
@@ -13,8 +14,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 动态数据绑定
+    // this.setData({
+    //   postList:dataObj.postList
+    // })
+    var dbpost=new DBpost();
     this.setData({
-      postList:dataObj.postList
+      postList:dbpost.getAllPostData()
     })
   },
 
