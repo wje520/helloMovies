@@ -1,6 +1,7 @@
-class DBpost {
-  constructor(url){
+class DBPost {
+  constructor(postId){
   this.storageKeyName='postList';
+  this.postId=postId;
   }
   // 获取所有的文章信息
   getAllPostData(){
@@ -15,5 +16,17 @@ class DBpost {
   execSetStorageSync(data){
     wx.setStorageSync(this.storageKeyName, data)
   }
+  //获取指定id的文章详情
+  getPostItemById(){
+    var postData=this.getAllPostData();
+    for(let i=0;i<postData.length;i++){
+      if(postData[i].postId==this.postId){
+        return {
+          index:i,
+          data:postData[i]
+        }
+      }
+    }
+  }
 };
-export {DBpost}
+export {DBPost}

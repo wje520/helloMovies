@@ -16,6 +16,9 @@
 <!--抽离文章成模板  -->
   <block wx:for="{{postList}}" wx:for-item="item" wx:for-index="idx">
   <!--使用扩展运算符将item对象展开，展开之后再传入template，目的消除template对外部变量名的依赖  -->
+  <!--不能在template上注册事件,需增加一个view标签  增加data-post-id属性，用于传参-->
+   <view catchtap='onTapToDetail' data-post-id='{{item.postId}}'> 
     <template is="postItemTpl" data="{{...item}}"/>
+   </view>
   </block>
 </view>
