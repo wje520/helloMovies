@@ -21,7 +21,20 @@ Page({
       post:this.postData
     })
   },
-
+  // 收藏事件
+  onCollectionTap(event){
+    var newData=this.dbPost.collect();
+    this.setData({
+      'post.collectionStatus': newData.collectionStatus,
+      'post.commentNum': newData.commentNum,
+    })
+    wx.showToast({
+      title: newData.collectionStatus?"收藏成功":"收藏失败",
+      icon:'success',
+      duration:1000,
+      mask:true
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    * 一般在这里进行界面设置

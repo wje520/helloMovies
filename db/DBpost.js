@@ -28,5 +28,36 @@ class DBPost {
       }
     }
   }
+  // 实现收藏功能
+  collect(){
+    return this.updatePostData('collect')
+  }
+  updatePostData(category){
+    // console.log(this)
+    var itemData = this.getPostItemById(),
+        postData=itemData.data,
+        allPostData = this.getAllPostData();
+    switch(category){
+      case 'collect':
+      // 处理收藏逻辑
+        if (!postData.collectionStatus){
+          // 当前状态未收藏
+          postData.collectionNum++;
+          postData.collectionStatus=true;
+        }else {
+          // 当前状态收藏
+          postData.collectionNum--;
+          postData.collectionStatus=false;
+          }
+          break;
+        default:
+            break;
+    }
+    // 更新缓存数据
+      allPostData[itemData.index]=postData;
+      this.execSetStorageSync(allPostData);
+      return postData;
+
+  }
 };
 export {DBPost}
