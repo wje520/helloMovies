@@ -24,9 +24,13 @@ Page({
 
   /**
    * 生命周期函数--监听页面初次渲染完成
+   * 一般在这里进行界面设置
    */
   onReady: function () {
-  
+    // 动态设置导航栏标题
+    wx.setNavigationBarTitle({
+      title: this.postData.title,
+    })
   },
 
   /**
