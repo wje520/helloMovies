@@ -14,7 +14,8 @@
 <!-- 点赞评论收藏模块 -->
 <view class="tool">
   <view class="tool-item" catchtap="onUpTap" data-post-id="{{post.postId}}">
-     <image src="/images/icon/wx_app_like.png" />
+    <image animation="{{animationUp}}" wx:if="{{post.upStatus}}" src="/images/icon/wx_app_liked.png" />
+     <image animation="{{animationUp}}" wx:else src="/images/icon/wx_app_like.png" />
     <text>{{post.upNum}}</text>
   </view>
   <view class="tool-item comment" catchtap="onCommentTap" data-post-id="{{post.postId}}">

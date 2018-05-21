@@ -32,6 +32,10 @@ class DBPost {
   collect(){
     return this.updatePostData('collect')
   }
+  // 实现点赞功能
+  up(){
+    return this.updatePostData('up')
+  }
   updatePostData(category){
     // console.log(this)
     var itemData = this.getPostItemById(),
@@ -50,8 +54,19 @@ class DBPost {
           postData.collectionStatus=false;
           }
           break;
-        default:
-            break;
+        case 'up':
+        // 处理点赞逻辑
+        if (!postData.upStatus){
+          postData.upNum++;
+          postData.upStatus=true;
+        }else {
+          postData.upNum--;
+          postData.upStatus=false;
+        }
+        break;
+      default:
+        break;
+
     }
     // 更新缓存数据
       allPostData[itemData.index]=postData;

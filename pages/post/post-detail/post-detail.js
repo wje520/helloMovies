@@ -20,8 +20,9 @@ Page({
     this.setData({
       post:this.postData
     })
+    this.setAnimation();
   },
-  // 收藏事件
+  // 收藏功能
   onCollectionTap(event){
     var newData=this.dbPost.collect();
     this.setData({
@@ -34,6 +35,32 @@ Page({
       duration:1000,
       mask:true
     })
+  },
+  //点赞功能
+  onUpTap(event){
+    var newData=this.dbPost.up();
+    this.setData({
+      'post.upStatus': newData.upStatus,
+      'post.upNum': newData.upNum,
+    })
+    // 增加点赞动画效果
+    this.animationUp.scale(2).step();
+    this.setData({
+      animationUp:this.animationUp.export()
+    })
+    setTimeout(function () {
+      this.animationUp.scale(1).step()
+      this.setData({
+        animationUp: this.animationUp.export()
+      })
+    }.bind(this), 300)
+  },
+  // 设置动画
+  setAnimation(){
+    var animationUp=wx.createAnimation({
+      timingFunction:'ease-in-out'
+    })
+    this.animationUp = animationUp;
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
