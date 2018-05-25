@@ -62,6 +62,13 @@ Page({
         })
         this.animationUp = animationUp;
     },
+    // 跳转至评论页
+    onCommentTap(event){
+      var id=event.currentTarget.dataset.postId;
+      wx.navigateTo({
+        url: '../post-comment/post-comment?id='+id
+      })
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      * 一般在这里进行界面设置

@@ -1,3 +1,4 @@
+var util=require('../utils/util.js');
 class DBPost {
     constructor(postId) {
             this.storageKeyName = 'postList';
@@ -72,7 +73,29 @@ class DBPost {
         allPostData[itemData.index] = postData;
         this.execSetStorageSync(allPostData);
         return postData;
-
     }
+    // 获取评论数据
+    getCommentData(){
+      var itemData=this.getPostItemById().data;
+      itemData.comments.sort(this.compareWithTime);  //sort方法里面填写函数
+      var comment;
+      for(var i=0;i<itemData.comments.length;i++){
+        // 增加评论时间戳
+        comment=itemData.comments[i];
+        comment.create_time=util.getDiffTime(comment.create_time,true);
+      }
+      return itemData.comments;
+    }
+    // 评论降序排序
+    compareWithTime(value1,value2){
+    var flag=parseFloat(value1.create_time)-parseFloat(value2.create_time);
+    if(flag<0){
+      return 1;
+    }else if(flag>0){
+      return -1;
+    }else {
+      return 0;
+    }
+  }
 };
 export { DBPost }

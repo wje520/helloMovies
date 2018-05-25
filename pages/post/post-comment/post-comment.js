@@ -1,6 +1,5 @@
-// pages/post/post.js
-// var dataObj=require("../../data/data.js")
-import {DBPost} from '../../db/DBPost.js'
+// pages/post/post-comment/post-comment.js
+import {DBPost} from '../../../db/DBPost.js'
 Page({
 
   /**
@@ -14,27 +13,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // 动态数据绑定
-    // this.setData({
-    //   postList:dataObj.postList
-    // })
-    var dbPost=new DBPost();
+    var postId=options.id;
+    this.dbPost=new DBPost(postId);
+    var comments=this.dbPost.getCommentData();
+    // 绑定评论数据
     this.setData({
-      postList:dbPost.getAllPostData()
+      comments:comments
     })
+    console.log(comments)
   },
-  onTapToDetail(event){
-    var postId=event.currentTarget.dataset.postId;
-    console.log(postId)
-     wx.navigateTo({
-    url: 'post-detail/post-detail?id='+postId,
-  })
-  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
   },
 
   /**
