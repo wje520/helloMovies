@@ -22,7 +22,18 @@ Page({
     })
     console.log(comments)
   },
-
+  // 实现图片预览功能
+  previewImg(event){
+    console.log("this.data.comments",this.data.comments)
+    var commentIdx=event.currentTarget.dataset.commentIdx,
+        imgIdx=event.currentTarget.dataset.imgIdx,
+        imgs=this.data.comments[commentIdx].content.img;
+    wx.previewImage({
+      current:imgs[imgIdx], //当前预览的图片的http链接
+      urls: imgs, //所有预览图片的http链接列表[]
+    })
+    
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
