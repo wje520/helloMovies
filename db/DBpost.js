@@ -37,7 +37,7 @@ class DBPost {
     up() {
         return this.updatePostData('up')
     }
-    updatePostData(category) {
+    updatePostData(category,newCommet) {
         // console.log(this)
         var itemData = this.getPostItemById(),
             postData = itemData.data,
@@ -65,7 +65,11 @@ class DBPost {
                     postData.upStatus = false;
                 }
                 break;
-            default:
+              case 'comment':
+                postData.comments.push(newCommet);
+                postData.commentNum++;
+                break;
+              default:
                 break;
 
         }
@@ -96,6 +100,10 @@ class DBPost {
     }else {
       return 0;
     }
+  }
+  // 发表评论
+  newComment(newCommet){
+    this.updatePostData('comment',newCommet);
   }
 };
 export { DBPost }

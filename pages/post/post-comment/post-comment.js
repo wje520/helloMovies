@@ -6,9 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    useKeyboardFlag:true,
+    keyboardInputValue:'',
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -20,7 +20,7 @@ Page({
     this.setData({
       comments:comments
     })
-    console.log(comments)
+    // console.log(comments)
   },
   // 实现图片预览功能
   previewImg(event){
@@ -31,8 +31,66 @@ Page({
     wx.previewImage({
       current:imgs[imgIdx], //当前预览的图片的http链接
       urls: imgs, //所有预览图片的http链接列表[]
+    })  
+  },
+  // 实现语音和键盘输入的切换
+  switchInputType(){
+  this.setData({
+    useKeyboardFlag: !this.data.useKeyboardFlag
+  })
+  },
+  // 获取input输入
+  bindCommentInput(event){
+    var val=event.detail.value;//获取input输入值
+    // var pos=event.detail.cursor;
+    // console.log(pos)
+    // console.log(val)
+    this.data.keyboardInputValue=val;
+    return  val.replace(/qq/g,'*')
+  },
+  // 实现自定义发送 提交用户评论
+  submitComment(){
+    var newData = {
+      username: "wje",
+      avatar: "/images/avatar/avatar-3.png",
+      create_time: new Date().getTime() / 1000,
+      content: {
+        txt: this.data.keyboardInputValue,
+      },
+    };
+    if(!newData.content.txt){
+      // 评论数据为空，不执行任何操作
+      return;
+    }
+    // 保存新评论到缓存数据库当中
+  this.dbPost.newComment(newData);
+  // 显示操作结果
+  this.showCommitSuccessToast();
+  // 重新渲染并绑定所有数据
+  this.bindCommentData();
+  // 评论成功后清空input值
+  this.resetAllDefaultStatus();
+    },
+    // 评论提交成功后的交互反馈
+  showCommitSuccessToast(){
+    wx.showToast({
+      title: '评论成功',
+      duration:1000,
+      icon:'success'
     })
-    
+  },
+  //绑定评论数据
+  bindCommentData(){
+  var comments=this.dbPost.getCommentData();
+  this.setData({
+    comments:comments
+  })
+  },
+  // 评论成功 清空input值
+  resetAllDefaultStatus(){
+    this.setData({
+      keyboardInputValue:''
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

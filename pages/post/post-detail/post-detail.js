@@ -27,7 +27,7 @@ Page({
         var newData = this.dbPost.collect();
         this.setData({
             'post.collectionStatus': newData.collectionStatus,
-            'post.commentNum': newData.commentNum,
+            'post.collectionNum': newData.collectionNum,
         })
         wx.showToast({
             title: newData.collectionStatus ? "收藏成功" : "收藏失败",
