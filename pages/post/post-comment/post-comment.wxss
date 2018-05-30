@@ -198,3 +198,51 @@
     text-align: center;
     font-family:Microsoft Yahei;
 }
+/*选择图片和拍照样式  */
+.send-more-box .more-btn-item{
+    display: inline-block;
+    width: 110rpx;
+    height: 145rpx;
+    margin-right: 35rpx;
+    text-align: center;
+}
+
+.more-btn-main{
+    width: 100%;
+    height:60rpx;
+    text-align: center;
+    border:1px solid #D5D5D5;
+    border-radius: 10rpx;
+    background-color: #fbfbfc;
+    margin: 0 auto;
+    padding:25rpx 0
+}
+.more-btn-main image{
+    width: 60rpx;
+    height: 60rpx;
+}
+.send-more-box .more-btn-item .btn-txt{
+    color: #888888;
+    font-size: 24rpx;
+    margin:10rpx 0;
+}
+
+.send-more-result-main{
+    margin-top: 30rpx;
+}
+.send-more-result-main .file-box{
+    margin-right: 14rpx;
+    height: 160rpx;
+    width: 160rpx;
+    position: relative;
+    display: inline-block;
+}
+.send-more-result-main image{
+    height: 100%;
+    width: 100%;
+}
+.send-more-result-main .file-box .img-box {
+    height: 100%;
+    width: 100%;
+}
+

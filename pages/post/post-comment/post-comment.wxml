@@ -34,18 +34,46 @@
   <!--input评论框  -->
   <view class="input-box">
     <view class="send-msg-box">
-    <!--语音输入  -->
-        <view hidden="{{useKeyboardFlag}}" class="input-item">
+      <!--语音输入  -->
+      <view hidden="{{useKeyboardFlag}}" class="input-item">
         <image src="/images/icon/wx_app_keyboard.png" class="comment-icon keyboard-icon" catchtap="switchInputType"></image>
         <input class="input speak-input {{recodingClass}}" value="按住 说话" disabled="disabled" catchtouchstart="recordStart" catchtouchend="recordEnd" />
-      </view>  
+      </view>
       <!--文字键盘输入  -->
-       <view hidden="{{!useKeyboardFlag}}" class="input-item">
+      <view hidden="{{!useKeyboardFlag}}" class="input-item">
         <image class="comment-icon speak-icon" src="/images/icon/wx_app_speak.png" catchtap="switchInputType"></image>
         <input class="input keyboard-input" value="{{keyboardInputValue}}" bindconfirm="submitComment" bindinput="bindCommentInput" placeholder="说点什么吧……" />
-      </view> 
+      </view>
       <image class="comment-icon add-icon" src="/images/icon/wx_app_add.png" catchtap="sendMoreMsg"></image>
       <view class="submit-btn" catchtap="submitComment">发送</view>
+    </view>
+    <!--选择图片和拍照界面  -->
+    <view class="send-more-box" hidden="{{!sendMoreMsgFlag}}">
+      <!-- 选择图片和拍照按钮 -->
+      <view class="send-more-btns-main">
+        <view class="more-btn-item" catchtap="chooseImage" data-category="album">
+          <view class="more-btn-main">
+            <image src="/images/icon/wx_app_upload_image.png"></image>
+          </view>
+          <text>照片</text>
+        </view>
+        <view class="more-btn-item" catchtap="chooseImage" data-category="camera">
+          <view class="more-btn-main">
+            <image src="/images/icon/wx_app_camera.png"></image>
+          </view>
+          <text>拍照</text>
+        </view>
+      </view>
+      <!--显示选择的图片-->
+      <view class="send-more-result-main" hidden="{{chooseFiles.length==0}}">
+        <block wx:for="{{chooseFiles}}" wx:for-index="idx">
+          <view class="file-box">
+            <view class="img-box">
+              <image src="{{item}}" mode="aspectFill"></image>
+            </view>
+          </view>
+        </block>
+      </view>
     </view>
   </view>
 </view>
