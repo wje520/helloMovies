@@ -69,6 +69,9 @@ class DBPost {
                 postData.comments.push(newCommet);
                 postData.commentNum++;
                 break;
+              case 'reading':
+                postData.readingNum++;
+                break;
               default:
                 break;
 
@@ -104,6 +107,10 @@ class DBPost {
   // 发表评论
   newComment(newCommet){
     this.updatePostData('comment',newCommet);
+  }
+  // 实现文章计数功能
+  addReadingTimes(){
+    this.updatePostData('reading')
   }
 };
 export { DBPost }

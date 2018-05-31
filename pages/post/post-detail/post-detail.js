@@ -21,6 +21,8 @@ Page({
             post: this.postData
         })
         this.setAnimation();
+        // 实现文章的计数功能
+        this.addReadingTimes();
     },
     // 收藏功能
     onCollectionTap(event) {
@@ -68,6 +70,10 @@ Page({
       wx.navigateTo({
         url: '../post-comment/post-comment?id='+id
       })
+    },
+    // 实现文章阅读的计数功能
+    addReadingTimes(){
+  this.dbPost.addReadingTimes();
     },
     /**
      * 生命周期函数--监听页面初次渲染完成

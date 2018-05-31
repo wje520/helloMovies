@@ -16,7 +16,8 @@
     bottom: 100rpx;
     right: 0;
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    /*解决真机运行时评论页面滑动卡顿的问题  */
+       -webkit-overflow-scrolling: touch;   
 }
 
 .comment-item {
