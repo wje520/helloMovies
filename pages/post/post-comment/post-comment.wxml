@@ -67,9 +67,11 @@
       <!--显示选择的图片-->
       <view class="send-more-result-main" hidden="{{chooseFiles.length==0}}">
         <block wx:for="{{chooseFiles}}" wx:for-index="idx">
-          <view class="file-box">
+          <view class="file-box {{deleteIndex==idx?'deleting':''}}">
             <view class="img-box">
               <image src="{{item}}" mode="aspectFill"></image>
+              <!--icon删除按钮  -->
+              <icon class="remove-icon" type="cancel" size="23" color="#FF0033" catchtap="deleteImage" data-idx="{{idx}}" />
             </view>
           </view>
         </block>

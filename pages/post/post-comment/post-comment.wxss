@@ -245,4 +245,23 @@
     height: 100%;
     width: 100%;
 }
+/*删除按钮  */
+.send-more-result-main .remove-icon{
+    position: absolute;
+    right: -20rpx;
+    top: -20rpx;
+}
+/*删除动画  */
+.send-more-result-main .file-box.deleting{
+    animation:deleting 0.5s ease;
+    animation-fill-mode: forwards;
+}
 
+@keyframes deleting {
+    0%{
+        transform: scale(1);
+    }
+    100%{
+        transform: scale(0);
+    }
+}

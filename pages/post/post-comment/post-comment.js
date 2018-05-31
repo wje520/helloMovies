@@ -10,7 +10,9 @@ Page({
     keyboardInputValue: '',
     sendMoreMsgFlag: false,
     // 保存已选择的图片
-    chooseFiles: []
+    chooseFiles: [],
+    // 删除图片的索引
+    deleteIndex: -1
   },
   /**
    * 生命周期函数--监听页面加载
@@ -49,7 +51,6 @@ Page({
     // console.log(pos)
     // console.log(val)
     this.data.keyboardInputValue = val;
-    return val.replace(/qq/g, '*')
   },
   // 实现自定义发送 提交用户评论
   submitComment() {
@@ -108,18 +109,33 @@ Page({
     if (leftCount <= 0) {
       return;
     }
-    var sourceType=event.currentTarget.dataset.category;
-    var _self=this;
+    var sourceType = event.currentTarget.dataset.category;
+    var _self = this;
     wx.chooseImage({
-      count:leftCount,
-      sourceType:sourceType,
-      success: function(res) {
+      count: leftCount,
+      sourceType: sourceType,
+      success: function (res) {
         console.log(res)
         _self.setData({
-          chooseFiles:imgArr.concat(res.tempFilePaths)
+          chooseFiles: imgArr.concat(res.tempFilePaths)
         })
       },
     })
+  },
+  // 删除已选择的图片
+  deleteImage(event) {
+    var index = event.currentTarget.dataset.idx;
+    this.setData({
+      deleteIndex: index
+    })
+    this.data.chooseFiles.splice(index, 1);
+    // 因为删除的动画执行设置为500毫秒，所以这里延时500毫秒再执行数据绑定
+    setTimeout(() => {
+      this.setData({
+        chooseFiles: this.data.chooseFiles,
+        deleteIndex: -1
+      })
+    }, 500)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

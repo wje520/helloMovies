@@ -43,16 +43,7 @@ var postList = [{
   upStatus: true,
   upNum: 22,
   comments: [
-    {
-      username: '青石',
-      avatar: '/images/avatar/avatar-3.png',
-      create_time: '1484723344',
-      content: {
-        txt: ' 那一年的毕业季，我们挥挥手，来不及说再见，就踏上了远行的火车。',
-        img: ["/images/comment/train-1.jpg", "/images/comment/train-2.jpg", "/images/comment/train-3.jpg"],
-        audio: null
-      }
-    }, {
+  {
       username: '水清',
       avatar: '/images/avatar/avatar-2.png',
       create_time: '1481018319',
