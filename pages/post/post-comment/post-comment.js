@@ -54,15 +54,17 @@ Page({
   },
   // 实现自定义发送 提交用户评论
   submitComment() {
+    var imgs=this.data.chooseFiles;
     var newData = {
       username: "wje",
       avatar: "/images/avatar/avatar-3.png",
       create_time: new Date().getTime() / 1000,
       content: {
         txt: this.data.keyboardInputValue,
+        img:imgs,
       },
     };
-    if (!newData.content.txt) {
+    if (!newData.content.txt&&imgs.length==0) {
       // 评论数据为空，不执行任何操作
       return;
     }
@@ -93,7 +95,9 @@ Page({
   // 评论成功 清空input值
   resetAllDefaultStatus() {
     this.setData({
-      keyboardInputValue: ''
+      keyboardInputValue: '',
+      chooseFiles:[],
+      sendMoreMsgFlag:false
     })
   },
   // 控制拍照面板的显示和隐藏
