@@ -12,7 +12,9 @@ Page({
     // 保存已选择的图片
     chooseFiles: [],
     // 删除图片的索引
-    deleteIndex: -1
+    deleteIndex: -1,
+    // 保存当前播放的语音url
+    currentAudio:''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -186,7 +188,6 @@ Page({
         audio: audio
       },
     };
-
     //保存新评论到缓存数据库中
     this.dbPost.newComment(newData);
 
@@ -195,6 +196,28 @@ Page({
 
     //重新渲染并绑定所有评论
     this.bindCommentData();
+  },
+  playAudio(event) {
+    var url = event.currentTarget.dataset.url,
+      that = this;
+
+    //暂停当前录音
+    if (url == this.data.currentAudio) {
+      wx.pauseVoice();
+      this.data.currentAudio = ''
+    }
+    //播放录音
+    else {
+      this.data.currentAudio = url;
+      wx.playVoice({
+        filePath: url,
+        complete: function () {
+          //只有当录音播放完后才会执行
+          that.data.currentAudio = '';
+          console.log('complete')
+        }
+      });
+    }
   },
   /**
    * 生命周期函数--监听页面显示
