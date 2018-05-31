@@ -146,7 +146,56 @@ Page({
    */
   onReady: function () {
   },
+  //开始录音
+  recordStart() {
+    var that = this;
+    this.setData({
+      recodingClass: 'recoding'
+    });
+    this.startTime = new Date();
+    wx.startRecord({
+      success: function (res) {
+        console.log('success');
+        var diff = (that.endTime - that.startTime) / 1000;
+        diff = Math.ceil(diff);
 
+        //发送录音
+        that.submitVoiceComment({ url: res.tempFilePath, timeLen: diff });
+      }
+    });
+  },
+
+  //结束录音
+  recordEnd() {
+    this.setData({
+      recodingClass: ''
+    });
+    this.endTime = new Date();
+    wx.stopRecord();
+  },
+
+  //提交录音 
+  submitVoiceComment(audio) {
+    var newData = {
+      username: "wje",
+      avatar: "/images/avatar/avatar-3.png",
+      create_time: new Date().getTime() / 1000,
+      content: {
+        txt: '',
+        img: [],
+        audio: audio
+      },
+    };
+
+    //保存新评论到缓存数据库中
+    this.dbPost.newComment(newData);
+
+    //显示操作结果
+    this.showCommitSuccessToast();
+
+    //重新渲染并绑定所有评论
+    this.bindCommentData();
+  },
   /**
    * 生命周期函数--监听页面显示
    */
