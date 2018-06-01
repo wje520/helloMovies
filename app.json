@@ -3,12 +3,29 @@
     "pages/welcome/welcome",
     "pages/post/post",
     "pages/post/post-detail/post-detail",
-    "pages/post/post-comment/post-comment"
+    "pages/post/post-comment/post-comment",
+    "pages/movie/movie"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#8FBC8F",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "",
      "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "selectedColor": "#8FBC8F",
+    "color": "#333",
+    "backgroundColor": "#fff",
+    "position":"top",
+    "list": [
+      {
+        "pagePath": "pages/post/post",
+        "text": "文章"
+      },
+      {
+        "pagePath": "pages/movie/movie",
+        "text": "电影"
+      }
+    ]
   }
 }
