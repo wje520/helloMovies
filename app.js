@@ -36,7 +36,9 @@ App({
       }
     })
   },
+// 在这里设置全局变量
   globalData: {
-    userInfo: null
+    userInfo: null,
+    doubanBase: "http://t.yushu.im",
   }
 })
