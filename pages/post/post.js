@@ -30,6 +30,14 @@ Page({
     url: 'post-detail/post-detail?id='+postId,
   })
   },
+  // 从swiper跳转到文章详情
+  onSwiperTap(event){
+    //targe指最开始被触发的元素（）。currentTarget指捕获事件的元素（这里指swiper）
+    var postId=event.target.dataset.postId; 
+    wx.navigateTo({
+      url: 'post-detail/post-detail?id='+postId,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
