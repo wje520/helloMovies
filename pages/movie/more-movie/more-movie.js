@@ -34,6 +34,7 @@ Page({
         break;
     }
     console.log("dataUrl==>",dataUrl)
+    this.data.requestUrl=dataUrl;
     util.http(dataUrl,this.processDoubanData);
   },
   processDoubanData(moviesDouban){
@@ -57,6 +58,8 @@ Page({
     this.setData({
       movies:movies
     });
+    // 重新绑定数据之后，结束下拉刷新
+    wx.stopPullDownRefresh();
   },
 
   /**
@@ -93,7 +96,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    var refreshUrl = this.data.requestUrl + "?star=0&count=20";
+    util.http(refreshUrl, this.processDoubanData);
   },
 
   /**
