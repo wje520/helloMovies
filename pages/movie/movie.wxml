@@ -1,5 +1,19 @@
 <import src="movie-list/movie-list-tpl.wxml" />
-<view class="container">
+<import src="movie-grid/movie-grid-tpl.wxml"/>
+<!-- 电影搜索 -->
+<view class="search">
+  <icon type="search" class="search-img" size="13" color="#405f80"></icon>
+  <input type="text" placeholder="后来的我们" 
+  placeholder-class="placeholder" bindfocus="onBindFocus" value="{{inputValue}}"
+  bindconfirm="onBindConfirm"/>
+  <image wx:if="{{searchPanelShow}}" src="/images/icon/wx_app_xx.png" class="xx-img" catchtap="onCancelImgTap"></image>
+</view>
+<!--电影搜索面板  -->
+<view class="search-panel" wx:if="{{searchPanelShow}}">
+    <template is="movieGridTpl" data="{{...searchResult}}"/>
+</view>
+<!-- 电影首页资讯 -->
+<view class="container" wx:if="{{containerShow}}">
   <view class="movies-template">
     <template is="movieListTpl" data="{{...inTheaters}}" />
   </view>

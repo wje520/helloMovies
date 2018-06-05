@@ -10,6 +10,10 @@ Page({
     inTheaters: {},
     comingSoon: {},
     top250: {},
+    // 搜索面板和电影资讯面板的显隐控制
+    containerShow:true,
+    searchPanelShow:false,
+    searchResult:{},
   },
 
   /**
@@ -65,20 +69,46 @@ Page({
       }
       movies.push(temp)
     }
-    // 动态设置数据绑定key
+    // 动态设置数据绑定key，key不同绑定不同的数据，这是电影模块一大注意点
     var readyData = {};
     readyData[settedKey] = {
       categoryTitle: categoryTitle,
       movies: movies
     }
     this.setData(readyData);
-    console.log('inTheaters', this.data.inTheaters)
+    console.log('inTheaters', this.data.inTheaters);
+    console.log("searchResult=>", this.data.searchResult)
   },
+  // 跳转到更多电影页面
   onMoreTap(event){
     var category=event.currentTarget.dataset.category;
     wx.navigateTo({
       url: 'more-movie/more-movie?category='+category,
     })
+  },
+  // 输入框聚焦时触发
+  onBindFocus(event){
+  this.setData({
+    containerShow:false,
+    searchPanelShow:true
+  })
+  },
+  // 取消搜索
+  onCancelImgTap(){
+  this.setData({
+    containerShow:true,
+    searchPanelShow:false,
+    // 清空搜索结果和input值
+    searchResult:{},
+    inputValue:""
+  })
+  },
+  // 响应搜索事件
+  onBindConfirm(event){
+  var keyWord=event.detail.value;
+  var searchUrl = app.globalData.doubanBase +
+    "/v2/movie/search?q=" + keyWord;
+  this.getMovieListData(searchUrl, "searchResult", "");
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
