@@ -63,6 +63,8 @@ Page({
     });
     // 重新绑定数据之后，结束下拉刷新
     wx.stopPullDownRefresh();
+    // 隐藏loading
+    wx.hideLoading();
   },
 
   /**
@@ -103,6 +105,9 @@ Page({
     // 页面刷新，恢复初始值  只加载前20条
     this.data.movies=[];
     util.http(refreshUrl, this.processDoubanData);
+    wx.showLoading({
+      title: '加载中',
+    })
   },
 
   /**
@@ -112,6 +117,9 @@ Page({
     var totalCount=this.data.movies.length;
     var nextUrl=this.data.requestUrl+"?start="+totalCount+ "&count=20";
     util.http(nextUrl, this.processDoubanData);
+    wx.showLoading({
+      title: '加载中',
+    })
   },
 
   /**
