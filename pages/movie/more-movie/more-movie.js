@@ -55,8 +55,11 @@ Page({
       }
       movies.push(temp)
     }
+    // 每次上拉刷新，更新movies保存所有的的电影条目数据
+    var totalMovies=[];
+    totalMovies=this.data.movies.concat(movies)
     this.setData({
-      movies:movies
+      movies: totalMovies
     });
     // 重新绑定数据之后，结束下拉刷新
     wx.stopPullDownRefresh();
@@ -97,6 +100,8 @@ Page({
    */
   onPullDownRefresh: function () {
     var refreshUrl = this.data.requestUrl + "?star=0&count=20";
+    // 页面刷新，恢复初始值  只加载前20条
+    this.data.movies=[];
     util.http(refreshUrl, this.processDoubanData);
   },
 
@@ -104,7 +109,9 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    var totalCount=this.data.movies.length;
+    var nextUrl=this.data.requestUrl+"?start="+totalCount+ "&count=20";
+    util.http(nextUrl, this.processDoubanData);
   },
 
   /**
