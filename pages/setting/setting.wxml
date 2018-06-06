@@ -1,0 +1,16 @@
+<view class="container">
+  <view class="category-item personal-info">
+    <view class="user-avatar">
+      <image src="{{userInfo.avatarUrl}}"></image>
+    </view>
+    <view class="user-name">
+      <view class="user-nickname">
+        <text class='nickname'>{{userInfo.nickName}}</text>
+        <text wx:if="{{userInfo.gender==1}}">男</text><text wx:if="{{userInfo.gender==2}}">女</text>
+      </view>
+      <view class="user-locaiton">
+        <text>所在地：{{userInfo.city}}</text>
+      </view>
+    </view>
+  </view>
+</view>
