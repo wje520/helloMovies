@@ -110,6 +110,13 @@ Page({
     "/v2/movie/search?q=" + keyWord;
   this.getMovieListData(searchUrl, "searchResult", "");
   },
+  // 跳转到电影详情页
+  onMovieTap(event){
+    var movieId = event.currentTarget.dataset.movieId;
+    wx.navigateTo({
+      url: 'movie-detail/movie-detail?id='+movieId,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

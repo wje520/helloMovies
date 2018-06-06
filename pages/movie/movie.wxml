@@ -6,7 +6,7 @@
   <input type="text" placeholder="后来的我们" 
   placeholder-class="placeholder" bindfocus="onBindFocus" value="{{inputValue}}"
   bindconfirm="onBindConfirm"/>
-  <image wx:if="{{searchPanelShow}}" src="/images/icon/wx_app_xx.png" class="xx-img" catchtap="onCancelImgTap"></image>
+   <image wx:if="{{searchPanelShow}}" src="/images/icon/wx_app_xx.png" class="xx-img" catchtap="onCancelImgTap"></image> 
 </view>
 <!--电影搜索面板  -->
 <view class="search-panel" wx:if="{{searchPanelShow}}">

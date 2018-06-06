@@ -137,10 +137,19 @@ function http(url, callBack) {
     }
   })
 }
+//将数组转换为以 / 分隔的字符串
+function convertToCastString(casts) {
+  var castsjoin = "";
+  for (var idx in casts) {
+    castsjoin = castsjoin + casts[idx].name + " / "; //实现字符串的拼接
+  }
+  return castsjoin.substring(0, castsjoin.length - 2);//删除最后的/分隔符
+}
 module.exports = {
   formatTime: formatTime,
   getDiffTime: getDiffTime,
   convertToStarsArray: convertToStarsArray,
   http:http,
+  convertToCastString: convertToCastString
 }
 
