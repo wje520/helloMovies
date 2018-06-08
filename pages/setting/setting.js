@@ -10,11 +10,8 @@ Page({
     // 开放接口
     api: [
       { title: '清理缓存', tap: 'clearCache' },
-      { title: '二维码', tap: 'scanCode' },
       { title: '用户登陆', tap: 'login' },
       { title: '校验用户信息', tap: 'check' },
-      { title: '获取用户加密信息', tap: 'decrypted' },
-      { title: '模板消息', tap: 'tplMessage' },
       { title: '微信支付', tap: 'wxPay' }
     ],
   },
@@ -55,18 +52,93 @@ Page({
       }
     })
   },
+  // 清理本地数据缓存
   clearCache(){
-    this.showModal('清除缓存','确定要清除本地数据缓存吗？',function(){
+    this.showModal('清理缓存','确定要清理本地数据缓存吗？',function(){
       wx.clearStorage({
         success:function(){
           wx.showToast({
-            title: '清除成功',
+            title: '清理成功',
             icon: 'success',
             duration: 1000,
             mask:true
           })
         }
       })
+    })
+  },
+  // 用户登录
+  login(){
+  wx.login({
+    success:function(res){
+      console.log("code=>",res)
+      wx.request({
+        url: 'http://localhost:8080/wxopen/wxlogin.php',
+        data:res.code,
+        success:function(res){
+          console.log('res=>',res)
+        },
+        fail:function(res){
+          console.log('fail=>', res)
+        }
+      })
+    }
+  })
+  },
+  // 校验用户信息
+  check(){
+    wx.login({
+      success: function (loginRes) {
+        console.log(loginRes)
+        wx.getUserInfo({
+          success: function (userRes) {
+            console.log(JSON.parse(userRes.rawData))
+             //服务端校验
+            wx.request({
+              url: "http://localhost:8080/wxopen/wxcheckuserinfo.php", 
+              data: {
+                code: loginRes.code,
+                signature: userRes.signature,
+                rawData: userRes.rawData
+              },
+              success: function (res) {
+                console.log(res.data);
+              }
+            })
+          }
+        })
+      }
+    })
+  },
+  // 微信支付
+  wxPay(){
+    wx.login({
+      success: function (res) {
+        console.log('code:' + res.code);
+        wx.request({
+          url: "http://127.0.0.1:8080/wxopen/wxpay.php",
+          data: {
+            code: res.code
+          },
+          success: function (res) {
+            var preData = res.data;
+            console.log(preData);
+            wx.requestPayment({
+              timeStamp: preData.timeStamp.toString(),
+              nonceStr: preData.nonceStr,
+              package: preData.package,
+              signType: preData.signType,
+              paySign: preData.paySign,
+              success: function (res) {
+                console.log(res);
+              },
+              fail: function (error) {
+                console.log(res);
+              }
+            })
+          }
+        })
+      }
     })
   },
   /**
