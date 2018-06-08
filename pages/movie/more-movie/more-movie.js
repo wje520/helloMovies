@@ -35,6 +35,9 @@ Page({
     }
     console.log("dataUrl==>",dataUrl)
     this.data.requestUrl=dataUrl;
+    wx.showLoading({
+      title: '加载中',
+    })
     util.http(dataUrl,this.processDoubanData);
   },
   processDoubanData(moviesDouban){

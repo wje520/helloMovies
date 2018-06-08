@@ -31,6 +31,9 @@ Page({
     this.getMovieListData(top250Url, "top250", "豆瓣Top250");
   },
   getMovieListData(url, settedKey,categoryTitle) {
+    wx.showLoading({
+      title: '加载中',
+    })
     var that=this;
     wx.request({
       url:url,
@@ -76,6 +79,7 @@ Page({
       movies: movies
     }
     this.setData(readyData);
+    wx.hideLoading();
     console.log('inTheaters', this.data.inTheaters);
     console.log("searchResult=>", this.data.searchResult)
   },

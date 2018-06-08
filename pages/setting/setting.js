@@ -20,21 +20,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
       })
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-          })
-        }
-      })
-    }
     console.log("userInfo=>",this.data.userInfo)
   },
   // 封装模态框

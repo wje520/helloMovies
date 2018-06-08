@@ -1,6 +1,7 @@
 //app.js
 App({
   onLaunch: function () {
+  var that=this;
     // 缓存初始化数据
     var storageData=wx.getStorageSync('postList');
     if(!storageData){
@@ -9,7 +10,19 @@ App({
       wx.clearStorageSync();
       wx.setStorageSync('postList', dataObj.postList)
     }
-    this.getUserInfo();
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.userInfo']) {
+          wx.authorize({
+            scope: 'scope.userInfo',
+            success() {
+              // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
+              that.getUserInfo();
+            }
+          })
+        }
+      }
+    })
   },
   getUserInfo() {
     // 对用户基本信息使用缓存

@@ -9,7 +9,9 @@ Page({
     var movieId = options.id;
     var detailUrl = app.globalData.doubanBase +
       "/v2/movie/subject/" + movieId;
-
+    wx.showLoading({
+      title: '加载中',
+    })
     util.http(detailUrl, this.processDoubanData)
   },
   processDoubanData(data) {
@@ -52,5 +54,6 @@ Page({
     wx.setNavigationBarTitle({
       title: data.title
     });
+    wx.hideLoading();
   },
 })

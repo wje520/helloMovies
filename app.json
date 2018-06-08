@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/post/post",
     "pages/post/post-detail/post-detail",
     "pages/post/post-comment/post-comment",
@@ -21,17 +22,17 @@
     "position":"top",
     "borderStyle":"white",
     "list": [
+        {
+          "pagePath": "pages/movie/movie",
+          "text": "电影"
+        },
+        {
+          "pagePath": "pages/post/post",
+          "text": "文章"
+        },
       {
         "pagePath": "pages/setting/setting",
         "text": "我"
-      },
-      {
-        "pagePath": "pages/movie/movie",
-        "text": "电影"
-      },
-      {
-        "pagePath": "pages/post/post",
-        "text": "文章"
       }
     ]
   }
